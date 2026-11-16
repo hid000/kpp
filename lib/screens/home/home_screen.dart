@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/data/mock_data.dart';
 import '../../core/models/stage.dart';
 import '../../core/models/vacancy.dart';
+import '../../core/services/app_services.dart';
 import '../../core/widgets/widgets.dart';
 import '../../routes/app_routes.dart';
 
@@ -18,7 +19,10 @@ class HomeScreen extends StatelessWidget {
       title: 'Головна',
       body: PageBody(
         children: [
-          Text('Вітаємо, ${MockData.firstName}!', style: text.headlineLarge),
+          Text(
+            'Вітаємо, ${AppServices.of(context).auth.currentUser?.firstName ?? ''}!',
+            style: text.headlineLarge,
+          ),
           const SizedBox(height: 8),
           Text(
             'Ось що відбувається з вашим пошуком роботи',

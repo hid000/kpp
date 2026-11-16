@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'core/services/app_services.dart';
 import 'routes/app_routes.dart';
 import 'theme/app_theme.dart';
 import 'theme/theme_controller.dart';
@@ -9,6 +10,10 @@ class KppApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final NavigatorObserver? analyticsObserver = AppServices.of(
+      context,
+    ).analytics.observer;
+
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeModeNotifier,
       builder: (context, mode, _) => MaterialApp(
@@ -19,6 +24,7 @@ class KppApp extends StatelessWidget {
         themeMode: mode,
         initialRoute: AppRoutes.login,
         onGenerateRoute: AppRoutes.onGenerateRoute,
+        navigatorObservers: [?analyticsObserver],
       ),
     );
   }

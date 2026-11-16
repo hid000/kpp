@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/models/vacancy.dart';
+import '../core/widgets/auth_gate.dart';
 import '../screens/auth/forgot_password_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
@@ -37,9 +38,16 @@ abstract final class AppRoutes {
     profile,
   ];
 
+  /// Екрани, доступні без входу.
+  static const Set<String> _public = {login, register, forgotPassword};
+
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     final Widget? page = switch (settings.name) {
-      login => const LoginScreen(),
+      // Збережений сеанс одразу відкриває головний екран.
+      login => const AuthGate(
+        signedIn: HomeScreen(),
+        signedOut: LoginScreen(),
+      ),
       register => const RegisterScreen(),
       forgotPassword => const ForgotPasswordScreen(),
       home => const HomeScreen(),
@@ -56,15 +64,20 @@ abstract final class AppRoutes {
     };
     if (page == null) return null;
 
+    // Захищені екрани без входу замінюються екраном входу.
+    final Widget guarded = _public.contains(settings.name)
+        ? page
+        : AuthGate(signedIn: page, signedOut: const LoginScreen());
+
     // Перемикання між розділами навігації відбувається без анімації.
     if (tabs.contains(settings.name)) {
       return PageRouteBuilder(
         settings: settings,
-        pageBuilder: (_, _, _) => page,
+        pageBuilder: (_, _, _) => guarded,
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       );
     }
-    return MaterialPageRoute(settings: settings, builder: (_) => page);
+    return MaterialPageRoute(settings: settings, builder: (_) => guarded);
   }
 }
