@@ -15,6 +15,11 @@ class AppTextField extends StatelessWidget {
     this.maxLines = 1,
     this.readOnly = false,
     this.onTap,
+    this.controller,
+    this.validator,
+    this.onFieldSubmitted,
+    this.autofillHints,
+    this.enabled = true,
   });
 
   final String label;
@@ -28,11 +33,22 @@ class AppTextField extends StatelessWidget {
   final int maxLines;
   final bool readOnly;
   final VoidCallback? onTap;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onFieldSubmitted;
+  final Iterable<String>? autofillHints;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: initialValue,
+      controller: controller,
+      initialValue: controller == null ? initialValue : null,
+      validator: validator,
+      onFieldSubmitted: onFieldSubmitted,
+      autofillHints: autofillHints,
+      enabled: enabled,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       maxLines: maxLines,
@@ -63,12 +79,22 @@ class PasswordField extends StatefulWidget {
     this.initialValue,
     this.helperText,
     this.textInputAction,
+    this.controller,
+    this.validator,
+    this.onFieldSubmitted,
+    this.autofillHints,
+    this.enabled = true,
   });
 
   final String label;
   final String? initialValue;
   final String? helperText;
   final TextInputAction? textInputAction;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onFieldSubmitted;
+  final Iterable<String>? autofillHints;
+  final bool enabled;
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -80,7 +106,13 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: widget.initialValue,
+      controller: widget.controller,
+      initialValue: widget.controller == null ? widget.initialValue : null,
+      validator: widget.validator,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      autofillHints: widget.autofillHints,
+      enabled: widget.enabled,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: _obscured,
       textInputAction: widget.textInputAction,
       decoration: InputDecoration(

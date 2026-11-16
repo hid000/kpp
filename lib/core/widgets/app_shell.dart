@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../routes/app_routes.dart';
-import '../data/mock_data.dart';
+import '../services/app_services.dart';
 import 'user_avatar.dart';
 
 /// Пункт бокової навігації.
@@ -150,8 +150,9 @@ class _TopBar extends StatelessWidget {
                 AppRoutes.profile,
                 (_) => false,
               ),
-              child: InitialsAvatar(
-                text: MockData.userName,
+              child: PhotoAvatar(
+                name: AppServices.of(context).auth.currentUser?.name ?? '',
+                photoUrl: AppServices.of(context).auth.currentUser?.photoUrl,
                 size: 46,
                 filled: Theme.of(context).brightness == Brightness.dark,
               ),

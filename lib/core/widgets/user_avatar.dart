@@ -44,3 +44,42 @@ class InitialsAvatar extends StatelessWidget {
     );
   }
 }
+
+/// Аватарка за URL фото; якщо фото немає або воно не завантажилось —
+/// ініціали [name].
+class PhotoAvatar extends StatelessWidget {
+  const PhotoAvatar({
+    super.key,
+    required this.name,
+    this.photoUrl,
+    this.size = 48,
+    this.filled = false,
+  });
+
+  final String name;
+  final String? photoUrl;
+  final double size;
+  final bool filled;
+
+  @override
+  Widget build(BuildContext context) {
+    final InitialsAvatar fallback = InitialsAvatar(
+      text: name,
+      size: size,
+      filled: filled,
+    );
+    final String? url = photoUrl;
+    if (url == null || url.isEmpty) return fallback;
+    return ClipOval(
+      child: Image.network(
+        url,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        errorBuilder: (_, _, _) => fallback,
+        loadingBuilder: (_, child, progress) =>
+            progress == null ? child : fallback,
+      ),
+    );
+  }
+}

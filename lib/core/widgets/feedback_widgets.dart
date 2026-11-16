@@ -46,6 +46,88 @@ class SuccessBanner extends StatelessWidget {
   }
 }
 
+/// Плашка з повідомленням про помилку (невдалий вхід, зміна пароля тощо).
+class ErrorBanner extends StatelessWidget {
+  const ErrorBanner({super.key, required this.message, this.action});
+
+  final String message;
+
+  /// Необов'язкова дія під текстом, напр. «Увійти знову».
+  final Widget? action;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colors = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: colors.errorContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.error, color: colors.onErrorContainer),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  message,
+                  style: TextStyle(fontSize: 15, color: colors.onErrorContainer),
+                ),
+                if (action != null) ...[const SizedBox(height: 8), action!],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Плашка з повідомленням про помилку (невдалий вхід, зміна пароля тощо).
+class ErrorBanner extends StatelessWidget {
+  const ErrorBanner({super.key, required this.message, this.action});
+
+  final String message;
+
+  /// Необов'язкова дія під текстом, напр. «Увійти знову».
+  final Widget? action;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colors = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: colors.errorContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.error, color: colors.onErrorContainer),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  message,
+                  style: TextStyle(fontSize: 15, color: colors.onErrorContainer),
+                ),
+                if (action != null) ...[const SizedBox(height: 8), action!],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /// Діалог підтвердження дії. Повертає true, якщо користувач погодився.
 Future<bool> showConfirmDialog(
   BuildContext context, {

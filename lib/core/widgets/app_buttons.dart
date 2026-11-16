@@ -8,6 +8,7 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.icon,
     this.expanded = false,
+    this.loading = false,
   });
 
   final String text;
@@ -15,12 +16,27 @@ class PrimaryButton extends StatelessWidget {
   final IconData? icon;
   final bool expanded;
 
+  /// Під час виконання запиту кнопка заблокована й показує індикатор,
+  /// щоб запобігти повторному надсиланню.
+  final bool loading;
+
   @override
   Widget build(BuildContext context) {
-    final Widget button = icon == null
-        ? FilledButton(onPressed: onPressed, child: Text(text))
+    final VoidCallback? action = loading ? null : onPressed;
+    final Widget button = loading
+        ? FilledButton.icon(
+            onPressed: action,
+            icon: const SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+            label: Text(text),
+          )
+        : icon == null
+        ? FilledButton(onPressed: action, child: Text(text))
         : FilledButton.icon(
-            onPressed: onPressed,
+            onPressed: action,
             icon: Icon(icon),
             label: Text(text),
           );

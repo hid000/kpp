@@ -1,6 +1,7 @@
 export 'app_buttons.dart';
 export 'app_cards.dart';
 export 'app_shell.dart';
+export 'auth_gate.dart';
 export 'app_text_field.dart';
 export 'auth_layout.dart';
 export 'brand_panel.dart';
