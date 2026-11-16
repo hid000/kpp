@@ -70,7 +70,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         reason: 'Помилка зміни пароля',
       );
       if (mounted) {
-        setState(() => _error = 'Не вдалося змінити пароль. Спробуйте пізніше.');
+        setState(
+          () => _error = 'Не вдалося змінити пароль. Спробуйте пізніше.',
+        );
       }
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -143,7 +145,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           controller: _confirm,
                           enabled: !_loading,
                           textInputAction: TextInputAction.done,
-                          validator: Validators.confirmPassword(() => _new.text),
+                          validator: Validators.confirmPassword(
+                            () => _new.text,
+                          ),
                           onFieldSubmitted: (_) => _submit(),
                         ),
                         if (_error != null) ...[

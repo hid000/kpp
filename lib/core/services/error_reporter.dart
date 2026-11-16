@@ -4,7 +4,11 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 /// тому для цієї платформи використано Sentry.
 abstract interface class ErrorReporter {
   /// Реєструє помилку, яку застосунок обробив і продовжив роботу (non-fatal).
-  Future<void> recordError(Object error, StackTrace stackTrace, {String? reason});
+  Future<void> recordError(
+    Object error,
+    StackTrace stackTrace, {
+    String? reason,
+  });
 }
 
 class SentryErrorReporter implements ErrorReporter {

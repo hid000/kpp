@@ -44,10 +44,7 @@ abstract final class AppRoutes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     final Widget? page = switch (settings.name) {
       // Збережений сеанс одразу відкриває головний екран.
-      login => const AuthGate(
-        signedIn: HomeScreen(),
-        signedOut: LoginScreen(),
-      ),
+      login => const AuthGate(signedIn: HomeScreen(), signedOut: LoginScreen()),
       register => const RegisterScreen(),
       forgotPassword => const ForgotPasswordScreen(),
       home => const HomeScreen(),

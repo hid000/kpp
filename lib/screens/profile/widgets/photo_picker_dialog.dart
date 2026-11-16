@@ -128,8 +128,7 @@ class _PhotoPickerDialogState extends State<_PhotoPickerDialog> {
                         label: 'HTTPS-посилання',
                         controller: _url,
                         keyboardType: TextInputType.url,
-                        validator: (v) =>
-                            (v == null || v.trim().isEmpty)
+                        validator: (v) => (v == null || v.trim().isEmpty)
                             ? null
                             : Validators.httpsUrl(v),
                         onFieldSubmitted: (_) => _useCustomUrl(),

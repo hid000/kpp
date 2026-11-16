@@ -126,7 +126,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context, snapshot) {
         final AppUser? user = snapshot.data;
         if (user == null) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
         return AppShell(
           selectedIndex: 4,
@@ -157,7 +159,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SecondaryButton(
                             text: 'Змінити фото',
                             icon: Icons.photo_camera,
-                            onPressed: _saving ? null : () => _changePhoto(user),
+                            onPressed: _saving
+                                ? null
+                                : () => _changePhoto(user),
                           ),
                         ],
                       ),

@@ -76,7 +76,10 @@ class FirebaseAuthRepository implements AuthRepository {
     required String displayName,
   }) => _guard(() async {
     final UserCredential credential = await _auth
-        .createUserWithEmailAndPassword(email: email.trim(), password: password);
+        .createUserWithEmailAndPassword(
+          email: email.trim(),
+          password: password,
+        );
     await credential.user?.updateDisplayName(displayName.trim());
     await credential.user?.reload();
   });

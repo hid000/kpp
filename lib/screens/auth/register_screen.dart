@@ -59,7 +59,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         reason: 'Помилка реєстрації',
       );
       if (mounted) {
-        setState(() => _error = 'Не вдалося зареєструватися. Спробуйте пізніше.');
+        setState(
+          () => _error = 'Не вдалося зареєструватися. Спробуйте пізніше.',
+        );
       }
     } finally {
       if (mounted) setState(() => _loading = false);

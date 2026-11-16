@@ -37,10 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final NavigatorState navigator = Navigator.of(context);
     setState(() => _loading = true);
     try {
-      await services.auth.signIn(
-        email: _email.text,
-        password: _password.text,
-      );
+      await services.auth.signIn(email: _email.text, password: _password.text);
       await services.analytics.logLogin();
       navigator.pushNamedAndRemoveUntil(AppRoutes.home, (_) => false);
     } on AuthFailure catch (e) {

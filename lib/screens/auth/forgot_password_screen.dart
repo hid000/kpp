@@ -50,7 +50,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         reason: 'Помилка відновлення пароля',
       );
       if (mounted) {
-        setState(() => _error = 'Не вдалося надіслати лист. Спробуйте пізніше.');
+        setState(
+          () => _error = 'Не вдалося надіслати лист. Спробуйте пізніше.',
+        );
       }
     } finally {
       if (mounted) setState(() => _loading = false);
